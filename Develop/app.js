@@ -65,35 +65,87 @@ async function managerPrompt() {
         });
 }
 
-managerPrompt();
+// managerPrompt();
+// whichEmployee();
 
+async function whichEmployee() {
+    try {
+        await inquirer
+            .prompt([
+                {
+                    name: 'typeOfEmployee',
+                    type: 'list',
+                    message: 'Which type of employee would you like to add?',
+                    choices: ['Engineer', 'Intern']
+                }
+            ])
+            .then(answers => {
+                console.log(answers);
+                return answers;
+            })
+            .catch(error => {
+                if (error.isTtyError) {
+                    console.log(`Prompt couldn't be rendered in the current environment`);
+                } else {
+                    console.log(error);
+                    console.log('Something is wrong');
+                }
+            });
+    } catch (error) {
+        console.log(error);
+    };
+};
 
-// async function whichEmployee() {
-//     try {
-//         await inquirer
-//             .prompt([
-//                 {
-//                     name: 'whichEmployee',
-//                     type: 'list',
-//                     message: 'Which type of employee would you like to add?',
-//                     choices: ['Engineer', 'Intern']
-//                 }
-//             ])
-//             .then(answers => {
-//                 return answers
-//             })
-//             .catch(error => {
-//                 if (error.isTtyError) {
-//                     console.log(`Prompt couldn't be rendered in the current environment`);
-//                 } else {
-//                     console.log(error);
-//                     console.log('Something is wrong');
-//                 }
-//             });
-//     } catch (error) {
-//         console.log(error);
-//     };
-// };
+async function engineerPrompt() {
+    try {
+        await inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'engName',
+                    message: `What's the engineer's name?`,
+                    default: 'Rocky'
+                },
+                {
+                    type: 'input',
+                    name: 'engId',
+                    message: `What's the engineer's id number?`,
+                    default: '123'
+                },
+                {
+                    type: 'input',
+                    name: 'engEmail',
+                    message: `What's the engineer's email?`,
+                    default: 'engtest@gmail.com'
+                },
+                {
+                    type: 'input',
+                    name: 'github',
+                    message: `What's the engineer's GitHub username?`,
+                    default: 'rrsalerno21'
+                },
+                {
+                    type: 'confirm',
+                    name:'addEmployee',
+                    message:'Employee added.  Would you like to add another employee?'
+                }
+            ])
+            .then(answers => {
+                console.log(answers);
+                return answers;
+            })
+            .catch(error => {
+                if (error.isTtyError) {
+                    console.log(`Prompt couldn't be rendered in the current environment`);
+                } else {
+                    console.log(error);
+                    console.log('Something is wrong');
+                }
+            });
+    } catch (error) {
+        console.log(error);
+    };
+};
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
