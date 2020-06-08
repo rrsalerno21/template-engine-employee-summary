@@ -10,65 +10,52 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const employees = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 async function managerPrompt() {
-    inquirer
-        .prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: `What's the manager's name?`,
-                default: 'Rocky'
-            },
-            {
-                type: 'input',
-                name: 'id',
-                message: `What's the manager's id number?`,
-                default: '123'
-            },
-            {
-                type: 'input',
-                name: 'email',
-                message: `What's the manager's email?`,
-                default: 'test@gmail.com'
-            },
-            {
-                type: 'input',
-                name: 'officeNumber',
-                message: `What's the manager's office number?`,
-                default: 'AB789'
-            },
-            {
-                type: 'confirm',
-                name:'addEmployee',
-                message:'Would you like to add an employee?'
-            }
-        ])
-        .then(answers => {
-            console.log(answers);
-            const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-            employees.push(manager);
-            console.log(employees);
-            return answers;            
-        })
-        .catch(error => {
-            if (error.isTtyError) {
-                console.log(`Prompt couldn't be rendered in the current environment`);
-            } else {
-                console.log(error);
-                console.log('Something is wrong');
-            }
-        });
-}
+    try {
+        const mangPrompt = await inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: `What's the manager's name?`,
+                    default: 'Rocky'
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: `What's the manager's id number?`,
+                    default: '123'
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: `What's the manager's email?`,
+                    default: 'test@gmail.com'
+                },
+                {
+                    type: 'input',
+                    name: 'officeNumber',
+                    message: `What's the manager's office number?`,
+                    default: 'AB789'
+                },
+                {
+                    type: 'confirm',
+                    name:'addEmployee',
+                    message:'Would you like to add an employee?'
+                }
+            ])
 
-// managerPrompt();
-// whichEmployee();
-// engineerPrompt();
-internPrompt();
+        return mangPrompt;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
 
 async function whichEmployee() {
     try {
@@ -133,7 +120,6 @@ async function engineerPrompt() {
                 }
             ])
             .then(answers => {
-                console.log(answers);
                 const engineer = new Engineer(answers.engName, answers.engId, answers.engEmail, answers.github);
                 employees.push(engineer);
                 console.log(employees);
@@ -205,6 +191,22 @@ async function internPrompt() {
         console.log(error);
     };
 };
+
+async function init() {
+    const employees = [];
+
+    const mPrompt = await managerPrompt();
+    console.log(mPrompt);
+
+    if (mPrompt.addEmployee) {
+        console.log('here we go');
+    }
+    // const whichE = await whichEmployee();
+    // const ePrompt = await engineerPrompt();
+    // const iPrompt= await internPrompt();
+}
+
+init();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
