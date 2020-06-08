@@ -162,22 +162,32 @@ async function init() {
     const employees = [];
 
     const mPrompt = await managerPrompt();
-    console.log(mPrompt);
+    employees.push(new Manager(mPrompt.name, mPrompt.id, mPrompt.email, mPrompt.officeNumber))
 
     if (mPrompt.addEmployee) {
         console.log('here we go');
-        const whichE = await whichEmployee();
-        console.log(whichE);
-
-        const ePrompt = await engineerPrompt();
-        console.log(ePrompt);
-
-        const iPrompt = await internPrompt();
-        console.log(iPrompt);
+        let cont = true;
+        while (cont) {
+            const whichE = await whichEmployee();
+            if (whichE.typeOfEmployee === 'Engineer') {
+                const ePrompt = await engineerPrompt();
+                employees.push(new Engineer(ePrompt.engName, ePrompt.engId, ePrompt.engEmail, ePrompt.github));
+                if (!ePrompt.addEmployee) {
+                    cont = false;
+                    continue;
+                }
+            } else {
+                const iPrompt = await internPrompt();
+                employees.push(new Intern(iPrompt.intName, iPrompt.intId, iPrompt.intEmail, iPrompt.school));
+                if (!iPrompt.addEmployee) {
+                    cont = false;
+                    continue;
+                };
+            };
+        };
     }
-    // const whichE = await whichEmployee();
-    // const ePrompt = await engineerPrompt();
-    // const iPrompt= await internPrompt();
+    console.log(employees);
+    console.log('Check out THIS_URL to see your team');
 }
 
 init();
