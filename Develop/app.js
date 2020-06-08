@@ -119,7 +119,7 @@ async function engineerPrompt() {
 
 async function internPrompt() {
     try {
-        await inquirer
+        const iPrompt = await inquirer
             .prompt([
                 {
                     type: 'input',
@@ -151,21 +151,8 @@ async function internPrompt() {
                     message:'Employee added.  Would you like to add another employee?'
                 }
             ])
-            .then(answers => {
-                console.log(answers);
-                const intern = new Intern(answers.intName, answers.intId, answers.intEmail, answers.school);
-                employees.push(intern);
-                console.log(employees);
-                return answers;
-            })
-            .catch(error => {
-                if (error.isTtyError) {
-                    console.log(`Prompt couldn't be rendered in the current environment`);
-                } else {
-                    console.log(error);
-                    console.log('Something is wrong');
-                }
-            });
+            
+            return iPrompt;
     } catch (error) {
         console.log(error);
     };
@@ -184,6 +171,9 @@ async function init() {
 
         const ePrompt = await engineerPrompt();
         console.log(ePrompt);
+
+        const iPrompt = await internPrompt();
+        console.log(iPrompt);
     }
     // const whichE = await whichEmployee();
     // const ePrompt = await engineerPrompt();
