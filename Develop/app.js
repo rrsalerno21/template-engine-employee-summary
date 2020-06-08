@@ -67,7 +67,8 @@ async function managerPrompt() {
 
 // managerPrompt();
 // whichEmployee();
-engineerPrompt();
+// engineerPrompt();
+internPrompt();
 
 async function whichEmployee() {
     try {
@@ -105,7 +106,7 @@ async function engineerPrompt() {
                     type: 'input',
                     name: 'engName',
                     message: `What's the engineer's name?`,
-                    default: 'Rocky'
+                    default: 'Engineer Rocky'
                 },
                 {
                     type: 'input',
@@ -135,6 +136,60 @@ async function engineerPrompt() {
                 console.log(answers);
                 const engineer = new Engineer(answers.engName, answers.engId, answers.engEmail, answers.github);
                 employees.push(engineer);
+                console.log(employees);
+                return answers;
+            })
+            .catch(error => {
+                if (error.isTtyError) {
+                    console.log(`Prompt couldn't be rendered in the current environment`);
+                } else {
+                    console.log(error);
+                    console.log('Something is wrong');
+                }
+            });
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+async function internPrompt() {
+    try {
+        await inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'intName',
+                    message: `What's the intern's name?`,
+                    default: 'Intern Rocky'
+                },
+                {
+                    type: 'input',
+                    name: 'intId',
+                    message: `What's the intern's id number?`,
+                    default: 'int678'
+                },
+                {
+                    type: 'input',
+                    name: 'intEmail',
+                    message: `What's the intern's email?`,
+                    default: 'inttest@gmail.com'
+                },
+                {
+                    type: 'input',
+                    name: 'school',
+                    message: `What's school does the intern's attend?`,
+                    default: 'UC Santa Barbara'
+                },
+                {
+                    type: 'confirm',
+                    name:'addEmployee',
+                    message:'Employee added.  Would you like to add another employee?'
+                }
+            ])
+            .then(answers => {
+                console.log(answers);
+                const intern = new Intern(answers.intName, answers.intId, answers.intEmail, answers.school);
+                employees.push(intern);
                 console.log(employees);
                 return answers;
             })
