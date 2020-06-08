@@ -67,6 +67,7 @@ async function managerPrompt() {
 
 // managerPrompt();
 // whichEmployee();
+engineerPrompt();
 
 async function whichEmployee() {
     try {
@@ -110,7 +111,7 @@ async function engineerPrompt() {
                     type: 'input',
                     name: 'engId',
                     message: `What's the engineer's id number?`,
-                    default: '123'
+                    default: 'eng345'
                 },
                 {
                     type: 'input',
@@ -132,6 +133,9 @@ async function engineerPrompt() {
             ])
             .then(answers => {
                 console.log(answers);
+                const engineer = new Engineer(answers.engName, answers.engId, answers.engEmail, answers.github);
+                employees.push(engineer);
+                console.log(employees);
                 return answers;
             })
             .catch(error => {
