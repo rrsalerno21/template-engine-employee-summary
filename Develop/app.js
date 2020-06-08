@@ -187,7 +187,12 @@ async function init() {
         };
     }
     console.log(employees);
-    console.log('Check out THIS_URL to see your team');
+    const teamHTML = render(employees);
+    fs.writeFile('team.html', teamHTML, (err) => {
+        if (err) throw err;
+        console.log('Success');
+    });
+    console.log('Check out your directory to see your team.html file');
 }
 
 init();
