@@ -59,7 +59,7 @@ async function managerPrompt() {
 
 async function whichEmployee() {
     try {
-        await inquirer
+        const whichOne = await inquirer
             .prompt([
                 {
                     name: 'typeOfEmployee',
@@ -68,18 +68,9 @@ async function whichEmployee() {
                     choices: ['Engineer', 'Intern']
                 }
             ])
-            .then(answers => {
-                console.log(answers);
-                return answers;
-            })
-            .catch(error => {
-                if (error.isTtyError) {
-                    console.log(`Prompt couldn't be rendered in the current environment`);
-                } else {
-                    console.log(error);
-                    console.log('Something is wrong');
-                }
-            });
+            
+        return whichOne;
+
     } catch (error) {
         console.log(error);
     };
@@ -200,6 +191,8 @@ async function init() {
 
     if (mPrompt.addEmployee) {
         console.log('here we go');
+        const whichE = await whichEmployee();
+        console.log(whichE);
     }
     // const whichE = await whichEmployee();
     // const ePrompt = await engineerPrompt();
