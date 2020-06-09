@@ -22,25 +22,21 @@ async function managerPrompt() {
                     type: 'input',
                     name: 'name',
                     message: `What's the manager's name?`,
-                    default: 'Rocky'
                 },
                 {
                     type: 'input',
                     name: 'id',
                     message: `What's the manager's id number?`,
-                    default: '123'
                 },
                 {
                     type: 'input',
                     name: 'email',
                     message: `What's the manager's email?`,
-                    default: 'test@gmail.com'
                 },
                 {
                     type: 'input',
                     name: 'officeNumber',
                     message: `What's the manager's office number?`,
-                    default: 'AB789'
                 },
                 {
                     type: 'confirm',
@@ -84,25 +80,21 @@ async function engineerPrompt() {
                     type: 'input',
                     name: 'engName',
                     message: `What's the engineer's name?`,
-                    default: 'Engineer Rocky'
                 },
                 {
                     type: 'input',
                     name: 'engId',
                     message: `What's the engineer's id number?`,
-                    default: 'eng345'
                 },
                 {
                     type: 'input',
                     name: 'engEmail',
                     message: `What's the engineer's email?`,
-                    default: 'engtest@gmail.com'
                 },
                 {
                     type: 'input',
                     name: 'github',
                     message: `What's the engineer's GitHub username?`,
-                    default: 'rrsalerno21'
                 },
                 {
                     type: 'confirm',
@@ -125,25 +117,21 @@ async function internPrompt() {
                     type: 'input',
                     name: 'intName',
                     message: `What's the intern's name?`,
-                    default: 'Intern Rocky'
                 },
                 {
                     type: 'input',
                     name: 'intId',
                     message: `What's the intern's id number?`,
-                    default: 'int678'
                 },
                 {
                     type: 'input',
                     name: 'intEmail',
                     message: `What's the intern's email?`,
-                    default: 'inttest@gmail.com'
                 },
                 {
                     type: 'input',
                     name: 'school',
                     message: `What's school does the intern's attend?`,
-                    default: 'UC Santa Barbara'
                 },
                 {
                     type: 'confirm',
@@ -165,7 +153,6 @@ async function init() {
     employees.push(new Manager(mPrompt.name, mPrompt.id, mPrompt.email, mPrompt.officeNumber))
 
     if (mPrompt.addEmployee) {
-        console.log('here we go');
         let cont = true;
         while (cont) {
             const whichE = await whichEmployee();
